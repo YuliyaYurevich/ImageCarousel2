@@ -65,17 +65,27 @@ function changeImage() {
    <div class="caption">${content[id].caption}</div>`;
 }
 
-right.addEventListener('click', () => {
-  console.log(id);
+function removeClass() {
   imgs[id].classList.remove('selected');
   imgs[id].classList.remove('feature');
+}
+
+right.addEventListener('click', () => {
+  removeClass();
   id++;
   changeImage();
 });
 
 left.addEventListener('click', () => {
-  imgs[id].classList.remove('selected');
-  imgs[id].classList.remove('feature');
+  removeClass();
   id--;
   changeImage();
+});
+
+Array.from(imgs).forEach((img, index) => {
+  img.addEventListener('click', (e) => {
+    removeClass();
+    id = index;
+    changeImage();
+  });
 });
